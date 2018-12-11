@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Tambah Antrian</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href="style.css" rel="stylesheet">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+        <style>
+
+            *{
+                margin: 0px;
+            }
+
+            form{
+                margin: 20px;
+            }
+            .kepala{
+                margin: 5px;
+                background-color: activecaption;
+                border-radius: 6px;
+                height: 150px;
+            }
+            h1{
+                padding: 20px;
+
+            }
+            p{
+                padding-left: 20px;
+                color: red;
+            }
+            footer{
+                text-align: center;
+            }
+
+
+
+        </style>
+    </head>
+    <body>
+        <div class="kepala">
+            <h1> Form Tambah Antrian baru</h1>
+            <p><b>Silahkan Nik kemudian Isi Tanggal dan Jenis Klinik</b></p>
+        </div>
+        
+        <ul class="nav nav-tabs" style="background-color: #e3f2fd;">
+            <li class="nav-item">
+                <a class="nav-link " href="myRS.html"><img src="logo.png" height="30" width="30"> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="TambahPasien.html"><b>Tambah Pasien</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="caripasien.html"><b>Cari Pasien</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="tambahKlinik.html"><b>Tambah Klinik</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="bacaklinik.html"><b>Tampil Klinik</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="TambahDokter.html"><b>Tambah Dokter</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="bacaDokterKU.html"><b>Tampil Dokter</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="TambahAntrian.html"><b>Tambah Antrian</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="carAntrian.html"><b>Cari Antrian</b></a>
+            </li>
+
+        </ul>
+
+
+        <div class="container">
+            <div class="form-group">
+                <label for="CariPasien"><b>Cari Pasien</b></label>
+                <input type="text" class="form-control" id="nik1" placeholder="Masukkan NIK">
+            </div>
+
+
+            <button type="button" class="btn btn-default" onclick="loadDoc()" id="btn">Cari</button>
+
+        </div> <br><br>
+        <p id="output">
+        </p>
+
+        <script>
+            function loadDoc() {
+                var url = "http://206.189.38.188:8080/myrs/webresources/pasien/cariPasien?nik=" + nik1.value;
+//                var url = "http://202.94.83.190:8080/myrs/webresources/pasien/cariPasien?nik=" + nik1.value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url, true);
+                xhttp.send();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("output").innerHTML = this.responseText;
+                        var myObj = JSON.parse(this.responseText);
+                        document.getElementById("nama").value = myObj.nama;
+                        document.getElementById("alamat").value = myObj.alamat;
+                        document.getElementById("nik").value = myObj.nik;
+
+                    }
+                }
+            }
+        </script>
+        <h1 style="text-align:center">Tambah Antrian</h1>
+
+        <form onsubmit="return make_json(this)" method="POST">
+
+            <div class="container">
+                <div class="form-group">
+                    <label for="nama">Name</label>
+                    <input type="text" class="form-control" id="nama" placeholder="Enter Name">
+                </div>
+                <div class="form-group">
+                    <label for="nik">Nik:</label>
+                    <input type="text" class="form-control" id="nik" placeholder="Enter ID Number">
+                </div>
+                <div class="form-group">
+                    <label for="alamat">Adress:</label>
+                    <input type="text" class="form-control" id="alamat" placeholder="Enter Adress">
+                </div>
+                <div class="form-group">
+                    <label for="tanggal">Tanggal Rawat Jalan:</label>
+                    <input style=" width:100%;" type="text" id="tanggal" value="">
+                </div>
+                <div class="form-group">
+                    <label for="namaKlinik">Nama Klinik</label><br>
+                    <select name="klinik" id="namaKlinik">
+                        <option style="color: black" label="--pilih klinik--"></option>
+                        <option style="color: black" label="anak">anak</option>
+                        <option style="color: black" label="mata">mata</option>
+                        <option style="color: black" label="gigi">gigi</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-default">Tambah</button>
+            </div>
+
+        </form>
+
+        <pre id="output2">
+        </pre>
+        <script>
+            function make_json(form) {
+                var json = {
+                    "noRm": form.nik.value,
+                    "nama": form.nama.value,
+                    "alamat": form.alamat.value,
+                    "tanggal": form.tanggal.value,
+                    "namaKlinik": form.namaKlinik.value
+                };
+                console.log("json oke");
+                var html = JSON.stringify(json, 0, 100);
+                console.log("html oke");
+//                 var Url = "http://206.189.38.188:8080/myrs/webresources/antrian/tambahAntri";
+                 var Url = "http://202.94.83.190:8080/165314045rsku/webresources/antrian/addAntrian";
+//                var Url = "http://localhost:8084/165314046MyRS/webresources/antrian/addNewAntrian";
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', Url, true);
+                console.log("open ok");
+                xhr.setRequestHeader("Content-type", "application/json");
+                xhr.send(html);
+                console.log("send ok");
+
+                document.getElementById("output2").innerHTML = html;
+
+                return false;
+            }
+
+//            function myFunction(response) {
+//                var arr = JSON.parse(response);
+//                var i;
+//                var out = "";
+//                out += '<table border="5" class="table">';
+//                out += '<thead>';
+//                out += '<tr>';
+//                out += '<th>Id</th>';
+//                out += '<th>Tanggal</th>';
+//                out += '<th>No Rm</th>';
+//                out += '<th>Nama</th>';
+//                out += '<th>Alamat</th>';
+//                out += '<th>Nama Klinik</th>';
+//                out += '</tr>';
+//                out += '</thead>';
+//                out += '<tbody>';
+//                for (i = 0; i < arr.length; i++) {
+//                    out += "<tr><td>" +
+//                            arr[i].idKlinik +
+//                            "</td><td>" +
+//                            arr[i].nama +
+//                            "</td><td>" +
+//                            arr[i].spesialis +
+//                            "</td></tr>";
+//                }
+//                out += '</thead>';
+//                out += '</table>';
+//                document.getElementById("demo").innerHTML = out;
+//            }
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+        <footer> Created by:Bg'Gans </footer>
+
+    </body>
+</html>

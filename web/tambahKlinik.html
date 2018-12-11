@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+
+        <title>Tambah Klinik</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <style>
+            *{
+                margin: 0px;
+            }
+
+            form{
+                margin: 20px;
+            }
+            .kepala{
+                margin: 5px;
+                background-color: activecaption;
+                border-radius: 6px;
+                height: 150px;
+            }
+            h1{
+                padding: 20px;
+            }
+            p{
+                padding-left: 20px;
+                color: red;
+            }
+            .content {
+
+                border:20px solid #ccc;
+                border-radius: 6px;
+                background-color: #ccc;
+            }         
+
+
+        </style>
+    </head>
+    <body>
+        <div class="kepala">
+            <h1>Daftar Klinik</h1>
+            <p><b>Silahkan Isi Id dan Nama Klinik</b></p>
+        </div>
+
+        <ul class="nav nav-tabs" style="background-color: #e3f2fd;">
+            <li class="nav-item">
+                <a class="nav-link " href="myRS.html"><img src="logo.png" height="30" width="30"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="TambahPasien.html"><b>Tambah Pasien</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="#"><b>Cari Pasien</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="tambahKlinik.html"><b>Tambah Klinik</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="bacaklinik.html"><b>Tampil Klinik</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="TambahDokter.html"><b>Tambah Dokter</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="bacaDokterKU.html"><b>Tampil Dokter</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="TambahAntrian.html"><b>Tambah Antrian</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="carAntrian.html"><b>Cari Antrian</b></a>
+            </li>
+        </ul>
+
+        <form action="" 
+              onsubmit="return make_json(this);" method="POST">
+            <div class="form-group">
+
+            </div>
+            <div class="form-group">
+                <label for="idklinik">ID Klinik</label>
+                <input type="text" class="form-control" id="idKlinik" aria-describedby="idklinik" placeholder="ID Klinik">
+            </div>
+            <div class="form-group">
+                <label for="namaKlinik">Nama Klinik</label>
+                <input type="text" class="form-control" id="nama" placeholder="Nama Klinik">
+            </div>
+            <div class="form-group">
+                <label for="Spesialis">Spesialis</label>
+                <input type="text" class="form-control" id="spesi" aria-describedby="spesialis" placeholder="Spesialis">
+            </div>
+            <button type="submit" class="btn btn-primary">Tambah</button>
+        </form>
+        <pre id="output">
+            
+        </pre>
+        <script>
+            function make_json(form) {
+                var json = {
+                    "idKlinik": form.idKlinik.value,
+                    "nama": form.nama.value,
+                    "spesialis": form.spesi.value
+                };
+
+                var html = JSON.stringify(json, 0, 100);
+                var Url = "http://202.94.83.190:8080/165314046MyRS/webresources/klinik/addKlinik";
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', Url, false);
+                xhr.setRequestHeader("Content-type", "application/json");
+                xhr.send(html);
+
+                document.getElementById("output").innerHTML = html;
+                return false;
+            }
+
+        </script>
+
+    </body>
+</html>

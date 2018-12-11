@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="loginstyle.css">
+       <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="login-box">
+            <h1>Login</h1>
+            <div class="textbox">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <input type="text" placeholder="Email" id="email" value="">
+            </div>
+             <div class="textbox">
+                 <i class="fa fa-lock" aria-hidden="true"></i>
+                <input type="password" placeholder="Password" id="password" value="">
+            </div>  
+            <p id="output">
+                
+            </p>
+            <button type="button" class="btn btn-primary" onclick="LoginDong()">Sign In</button>
+        </div>           
+  
+        <script>
+//            function login() {
+//                window.open("myRS.html", "_self");
+//                setCookie("email",email.value,1);
+//            }
+            function setCookie(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            }
+            function LoginDong(){
+                var json ={
+                    "email" : email.value,
+                    "password" : password.value
+                };
+                var html = JSON.stringify(json, 0, 100);
+//                var url ="http://localhost:8084/165314046MyRS/webresources/user/login";
+              var url ="http://202.94.83:8080/165314046MyRS/webresources/user/login";
+//                var url = "http://localhost:8084/165314046MyRS/webresources/user";
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", Url, true);
+                xhr.setRequestHeader("Content-type", "application/json");
+                xhr.send(html);
+                xhr.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status == 200){
+                        console.log("coba masuk");
+                        if(this.responseText != ""){
+                            console.log("coba");
+                            var objj = JSON.parse(this.responseText);
+                            setCookie("email", objj.email, 1);
+                            setCookie("password", objj.password, 1);
+                            window.open("myRS.html","_self");
+                            
+                        } else{
+                            document.getElementById("output").innerHTML = "Email/Password Salah Nying";
+                        }
+                    }
+                }
+                return false;
+            }
+            
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,67 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 7, 2018, 9:13:01 PM
+    Author     : USER
+*/
+@import"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: url(log.JPG) no-repeat;
+    background-size: cover;
+}
+.login-box{
+    width: 280px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+}
+.login-box h1{
+    float: left;
+    font-size: 40px;
+    border-bottom: 6px solid #0F2E2C;
+    margin-bottom: 50px;
+    padding: 13px 0;
+}
+.textbox{
+    width: 100%;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 8px 0;
+    margin: 8px 0;
+    border-bottom: 1px solid #0F2E2C;
+        
+}
+.textbox i{
+    width: 26px;
+    float: left;
+    text-align: center;
+}
+.textbox input{
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    font-size: 20px;
+    width: 80%;
+    float: left;
+    margin: 10px;
+    
+}
+.btn{
+    width: 100px;
+    background: none;
+    border: 2px solid #0F2E2C;
+    color: white;
+    padding: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 12px 0;
+}

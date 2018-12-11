@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title> Cari pasien</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <style>
+
+            *{
+                margin: 0px;
+
+            }
+            form{
+                margin: 20px;
+            }
+            .kepala{
+                background-color: activecaption;
+                border-radius: 6px;
+                height: 150px;
+                margin: 4px;
+            }
+            .kepala h2{
+                padding: 20px;
+
+
+            }
+            .kepala p{
+                padding-left: 20px;
+                color: red;
+
+            }
+            .isi{
+                margin: 10px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="kepala">
+            <h2><b>Cari Data Pasien</b></h2>
+            <p><b>Silahkan masukan nik untuk mencari data pasien</b></p>
+
+        </div>
+        <ul class="nav nav-tabs" style="background-color: #e3f2fd;">
+            <li class="nav-item">
+                <a class="nav-link " href="myRS.html"><img src="logo.png" height="30" width="30"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="TambahPasien.html"><b>Tambah Pasien</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#"><b>Cari Pasien</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="tambahKlinik.html"><b>Tambah Klinik</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="bacaklinik.html"><b>Tampil Klinik</b></a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link " href="TambahDokter.html"><b>Tambah Dokter</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="bacaDokterKU.html"><b>Tampil Dokter</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="TambahAntrian.html"><b>Tambah Antrian</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="carAntrian.html"><b>Cari Antrian</b></a>
+            </li>
+        </ul>
+        <form> 
+            <div class="isi">   
+                <label for="nik">Nomor Induk Kependudukan </label>
+                <input type="text" class="form-control" id="nik" placeholder="Nomor induk kependudukan" required><br>
+                <button type="button" onclick="loadDoc()" id="btn" class="btn btn-primary">Cari</button>
+                <p id="output">
+
+                </p>
+                <label for="noRekamMedis">No Rekam Medis</label>
+                <input type="text" class="form-control" id="noRm" placeholder="No rekam medis">
+                <label for="namaPasien">Nama Pasien</label>
+                <input type="text" class="form-control" id="nama" placeholder="Nama pasien" >
+                <label for="AlamatPasien">Alamat Pasien</label>
+                <input type="text" class="form-control" id="alamat" placeholder="Alamat pasien" >
+                <label for="tanggallahir">TanggalLahir</label>
+                <input type="text" class="form-control" id="tanggalLahir" placeholder="Tanggal lahir">
+                <label for="kelamin">Jenis Kelamin</label>
+                <input type="text" class="form-control" id="kelamin" placeholder="Jenis kelamin" >
+            </div>
+        </form>
+        <script>
+            function loadDoc() {
+//              var url ="http://206.189.38.188:8080/myrs/webresources/pasien/cariPasien?nik=" + nik.value;
+//                var url ="http://localhost:8084/165314046MyRS/webresources/pasien/cariPasien?nik=" +nik.value;
+                var url ="http://202.94.83.190:8080/165314046MyRS/webresources/pasien/cariPasien?nik=" +nik.value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url, true);
+                xhttp.send();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+//                        document.getElementById("output").innerHTML =
+//                                this.responseText;
+                        var obj = JSON.parse(this.responseText);
+                        document.getElementById("noRm").value =
+                                obj.noRm;
+                        document.getElementById("nama").value =
+                                obj.nama;
+                        document.getElementById("alamat").value =
+                                obj.alamat;
+                        document.getElementById("tanggalLahir").value =
+                                obj.tanggallahir;
+                        document.getElementById("kelamin").value =
+                                obj.kelamin;
+
+                    }
+
+                }
+            }
+        </script>
+    </body>
+</html>

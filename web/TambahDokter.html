@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Tambah Dokter</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <style>
+             *{
+                margin: 0px;
+            }
+
+            form{
+                margin: 20px;
+            }
+            .kepala{
+                margin: 5px;
+                background-color: activecaption;
+                border-radius: 6px;
+                height: 150px;
+            }
+            h1{
+                padding: 20px;
+
+            }
+            p{
+                padding-left: 20px;
+                color: red;
+            }
+            footer{
+                text-align: center;
+            }
+
+
+        </style>
+    </head>
+    <body>
+         <div class="kepala">
+            <h1> Form Tambah Dokter Baru</h1>
+            <p><b>Silahkan Isi nama dan Spesialis Dokter</b></p>
+        </div>
+        
+         <ul class="nav nav-tabs" style="background-color: #e3f2fd;">
+            <li class="nav-item">
+                <a class="nav-link " href="myRS.html"><img src="logo.png" height="30" width="30"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><b>Tambah Pasien</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="caripasien.html"><b>Cari Pasien</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="tambahKlinik.html"><b>Tambah Klinik</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="bacaklinik.html"><b>Tampil Klinik</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active " href="TambahDokter.html"><b>Tambah Dokter</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="bacaDokterKU.html"><b>Tampil Dokter</b></a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link " href="TambahAntrian.html"><b>Tambah Antrian</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="carAntrian.html"><b>Cari Antrian</b></a>
+            </li>
+            
+        </ul>
+        
+         <form onsubmit="return make_json(this);" method="POST">
+            <div class="form-group">
+
+            </div>
+            <div class="form-group">
+                <label for="namaDokter">Nama</label>
+                <input type="text" class="form-control" id="nama" aria-describedby="nama" placeholder="Isi nama Dokter">
+            </div>
+            <div class="form-group">
+                <label for="spesialis">Spesialis</label>
+                <input type="text" class="form-control" id="spesialis" placeholder="isi spesialis dokter">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Tambah</button>
+
+
+        </form>
+          <pre id="output">  
+          
+        </pre>
+        
+        <script>
+            function make_json(form) {
+                var json = {
+                    "nama": form.nama.value,
+                    "spesialis": form.spesialis.value};
+
+                var html = JSON.stringify(json, 0, 100);
+                var Url = "http://localhost:8084/165314046MyRS/webresources/dokter/addDokter";
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', Url, false);
+                xhr.setRequestHeader("Content-type", "application/json");
+                xhr.send(html);
+
+                document.getElementById("output").innerHTML = html;
+                return false;
+            }
+
+        </script>
+    </body>
+</html>

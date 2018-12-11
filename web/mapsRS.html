@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple Map</title>
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta charset="utf-8">
+        <style>
+            /* Always set the map height explicitly to define the size of the div
+             * element that contains the map. */
+            #map {
+                height: 100%;
+                width:  100%;
+            }
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+        <script>
+            var map;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat:  -7.767138, lng: 110.431055},
+                    zoom: 12
+                });
+                // The marker, positioned at Uluru
+                var marker = new google.maps.Marker({position: {lat:  -7.767138, lng: 110.431055}, map: map});
+                 var marker = new google.maps.Marker({position: {lat: -7.753030, lng: 110.398563}, map: map});
+                  var marker = new google.maps.Marker({position: {lat: -7.783977, lng: 110.411065}, map: map});
+
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwWoqhC8Icd6x6z83-xaYzJ5oTuPKu3Uk&callback=initMap"
+        async defer></script> <br><br>
+
+
+    </body>
+</html>
