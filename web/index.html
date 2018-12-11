@@ -47,9 +47,9 @@ and open the template in the editor.
                     "password" : password.value
                 };
                 var html = JSON.stringify(json, 0, 100);
-//                var url="http://localhost:8084/165314046MyRS/webresources/user/login";
-                  var url="http://202.94.83:8080/165314046MyRS/webresources/user/login";
-
+                var url="http://202.94.83.190:8080/165314046MyRS/webresources/user/login";
+//                  var url="http://202.94.83:8080/165314046MyRS/webresources/user/login";
+                  
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", url, true);
                 xhr.setRequestHeader("Content-type", "application/json");
